@@ -1,0 +1,23 @@
+{% extends 'blog/base.html' %}
+
+{% block head %}
+    <title>Mysite - Form</title>
+
+{% endblock %}
+
+{% block conteudo %}
+    <div class=" row">
+        <form action="" method="POST" novalidate>
+            {% csrf_token %}
+            {% for post in form %}
+                <div class ="col-10 mb-3" >
+                    {{post.label_tag}}
+                    {{post}}
+                </div>
+            {% endfor %}
+            <div class="col-12">
+                <button class="btn btn-primary" type="submit">Enviar</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}

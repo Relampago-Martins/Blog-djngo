@@ -1,18 +1,21 @@
 # Blog-djngo
 Projeto de um blog em django (Curso de extensao)
 
-##para entrar na virtualenv
+## para entrar na virtualenv
 projeto-ferias/Scripts/Activate
 
-##para sair da virtualenv
+## para sair da virtualenv
 deactivate
 
-##git resetando o main breanch
+## git resetando o main breanch
 git checkout master   
 git branch main master -f    
 git checkout main  
 git push origin main -f 
 (git pull origin main -f)
+##cria branch
+git branch <nome>
+gut merge
 
 !colocar git no pah!
 !usar o mingw para escrever comandos git!
@@ -21,12 +24,11 @@ git push origin main -f
 git status
 git add .
 git commit -m ''
-git pull 
-git push
-
+git pull .
+git push .
 
 git diff  blog/views.py
 
 
-##django
-./manage.py runserver
+## django
+python manage.py runserver

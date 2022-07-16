@@ -1,0 +1,22 @@
+{% extends 'blog/base.html' %}
+
+{% block head %}
+    <title>Mysite - Home</title>
+
+{% endblock %}
+
+{% block conteudo %}
+    <div class="col-10 mb-3">
+        <h2>Criações em destaque:</h2>
+    </div>
+    {% for post in obj %}
+    <div class="row justify-content-center">
+        <div class="col-10 mb-3">
+            <h3><a href="">{{post.titulo}}</a></h3> 
+            <span>{{post.text}}</span>
+            <span>{{post.data_criacao}}</span>
+            <span>Feito por {{post.autor}}</span>
+        </div>
+    </div>
+    {% endfor %}
+{% endblock %}

@@ -1,0 +1,12 @@
+h1{
+    color: rgb(52, 91, 165);
+}
+.fonte {
+    font-family: 'Bebas Neue', cursive;
+    text-align: center;
+    /* font-size: 48px; */
+    /* text-shadow: 4px 4px 4px #aaa; */
+}
+.cabecalho{
+    background: rgb(184, 176, 176);
+}
