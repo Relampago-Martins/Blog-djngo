@@ -19,7 +19,7 @@
                 {{post.text}}
             </div>
             <div class="col-10 mb-3 autor">
-                {{post.autor}}
+                Ecrito por <em>{{post.autor}}</em>
             </div>
         </div>
         {% if user.is_authenticated %}
@@ -29,8 +29,9 @@
             </div>
         </div>
         {% endif %}
+        <hr data-content="AND" class="hr-text mt-5">
         <div class="row">
-            <form class="col-12 mb-4" method="POST" action="{% url 'detalhe' pk=post.id %}">
+            <form class="col-12  mb-4" method="POST" action="{% url 'detalhe' pk=post.id %}">
                 {% csrf_token %}
                 {{form.comment}}
                 {% if user.is_authenticated %}

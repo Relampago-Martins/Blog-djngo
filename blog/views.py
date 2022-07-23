@@ -60,6 +60,12 @@ class CriaFormView(CreateView):
     form_class = MeuForm
     success_url = '/'
 
+    def get(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return redirect('%s?next=%s' % ('/admin/login', request.path))
+
+        return super(CriaFormView, self).get( request, *args, **kwargs)
+        
 
     def post(self, request, *args, **kwargs):
         self.object = None
@@ -70,8 +76,9 @@ class CriaFormView(CreateView):
         
         if form.is_valid():
             instancia = form.save(commit=False)
-            instancia.autor = User.objects.get(email='bgmartins@ucs.br')
-            return self.form_valid(instancia)
+            instancia.autor = self.request.user
+            instancia.save()
+            return HttpResponseRedirect(reverse('detalhe',  kwargs={'pk' : instancia.id}))
         else:
             for field in form.fields:
                 if field in form.errors:
