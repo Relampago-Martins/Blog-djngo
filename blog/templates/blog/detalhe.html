@@ -33,9 +33,11 @@
             <form class="col-12 mb-4" method="POST" action="{% url 'detalhe' pk=post.id %}">
                 {% csrf_token %}
                 {{form.comment}}
+                {% if user.is_authenticated %}
                 <div class="col-12 mt-2">
                     <button class="btn btn-primary" type="submit">Comentar</button>
                 </div>
+                {% endif %}
             </form>
             <div class="col mb-2 mt-5">
                 <h2>
