@@ -16,3 +16,17 @@ class MeuForm(ModelForm):
             'text' :  Textarea(attrs={'class':'form-control'}),
             'data_pub' :   DateTimeInput(attrs={'class':'form-control'}),
         }
+
+class CommentForm(ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['comment']
+        labels = {
+            'comment' : 'Comente aqui',
+        }
+        widgets = {
+            'comment' :  TextInput(attrs={
+                'class':'form-control',
+                'placeholder': 'Digite seu comentário',
+                }),
+        }

@@ -20,18 +20,22 @@ class Post(models.Model):
         self.data_pub = timezone.now()
         self.save()
 
-class Comentario(models.Model):
+class Comment(models.Model):
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL, 
         on_delete=models.CASCADE
     )
     post = models.ForeignKey(
         Post,
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
+        related_name='comments'
     )
-    data = models.DateTimeField(
+    date = models.DateTimeField(
         default=timezone.now
     )
-    comentario = models.TextField(
+    comment = models.TextField(
         max_length=200
     )
+
+    def __str__(self):
+        return f'{self.comment[:10]}'

@@ -1,21 +1,58 @@
 {% extends 'blog/base.html' %}
-{% block conteudo %}
-    <div class="row">
-        <div class="col-12 mb-3">
-            <h2>
-                {{post.titulo}}
-            </h2>
-        </div>
-        <div class="col-10 mb-3">
-            {{post.text}}
-        </div>
-    </div>
+{% load static %}
 
-    {% if user.is_authenticated %}
-    <div class="row">
-        <div class="col-12"> 
-            <a href="{% url 'edit' post.id %}" class="btn btn-primary">edite</a>
+{% block head %}
+    <title>Mysite - {{post.titulo}}</title>
+    <link rel="stylesheet" href="{% static 'css/detalhe.css' %}"/>
+{% endblock %}
+
+{% block conteudo %}
+<div class="row justify-content-center">
+    <div class="col-10">
+        <div class="row">
+            <div class="col-12 mb-3">
+                <h2>
+                    {{post.titulo}}
+                </h2>
+            </div>
+            <div class="col-10 mb-3">
+                {{post.text}}
+            </div>
+            <div class="col-10 mb-3 autor">
+                {{post.autor}}
+            </div>
         </div>
+        {% if user.is_authenticated %}
+        <div class="row">
+            <div class="col-12 mb-5"> 
+                <a href="{% url 'edit' post.id %}" class="btn btn-primary">edite</a>
+            </div>
+        </div>
+        {% endif %}
+        <div class="row">
+            <form class="col-12 mb-4" method="POST" action="{% url 'detalhe' pk=post.id %}">
+                {% csrf_token %}
+                {{form.comment}}
+                <div class="col-12 mt-2">
+                    <button class="btn btn-primary" type="submit">Comentar</button>
+                </div>
+            </form>
+            <div class="col mb-2 mt-5">
+                <h2>
+                    Comentários
+                </h2>                
+            </div>
+            {% for comment in post.comments.all %}
+                <div class="col-12 mt-4 mb-1">
+                    {{comment.user}}:
+                </div>
+                <div class="col-12 mb-1">
+                    {{comment.comment}}
+                </div>
+            {% endfor %}
+        </div>
+        
     </div>
-    {% endif %}
+</div>
+
 {% endblock %}

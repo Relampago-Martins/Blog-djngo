@@ -1,10 +1,12 @@
 import datetime
+from django.http import HttpResponseRedirect
 
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from django.views.generic.edit import FormView, CreateView
 from django.views import generic
 from django.shortcuts import redirect
 from django.urls import reverse
+from IPython import embed
 
 from blog.models import *
 from blog.forms import *
@@ -35,8 +37,22 @@ class Meu_detalhe(generic.DetailView):
         # Call the base implementation first to get a context
         context = super().get_context_data(**kwargs)
         # Add in a QuerySet of all the books
+
+        context.update({
+            'form' : CommentForm()
+        })
+
         return context
 
+    def post(self, request, *args, **kwargs):
+        form = CommentForm(request.POST)
+        post = get_object_or_404(Post, pk=kwargs['pk'])
+        if form.is_valid():
+            obj = form.save(commit=False)
+            obj.user = request.user
+            obj.post = post
+            obj.save()
+            return HttpResponseRedirect(reverse('detalhe',  kwargs={'pk' : post.pk}))
 
 class CriaFormView(CreateView):
     template_name = 'blog/form_create.html'
@@ -55,9 +71,7 @@ class CriaFormView(CreateView):
         if form.is_valid():
             instancia = form.save(commit=False)
             instancia.autor = User.objects.get(email='bgmartins@ucs.br')
-            instancia.save()
-
-            return self.form_valid(form)
+            return self.form_valid(instancia)
         else:
             for field in form.fields:
                 if field in form.errors:
