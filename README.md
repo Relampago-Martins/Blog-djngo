@@ -23,12 +23,12 @@ gut merge
 ## para commitar
 git status
 git add .
-git commit -m ''
 git pull .
-git push .
+git commit -m ''
+git push origin main -f 
 
 git diff  blog/views.py
 
 
 ## django
-python manage.py runserver
+python manage.py runserver --noreload

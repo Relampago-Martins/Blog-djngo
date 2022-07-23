@@ -1,18 +1,28 @@
 {% extends 'blog/base.html' %}
+{% load static %}
 
 {% block head %}
-    <title>Mysite - Form</title>
 
+    <title>Mysite - Form</title>
+    <link rel="stylesheet" href="{% static 'css/form_create.css' %}"/>
 {% endblock %}
 
 {% block conteudo %}
-    <div class=" row">
-        <form action="" method="POST" novalidate>
+<div class="row g-0 justify-content-center">
+    <div class="col-10 col-md-8 col-lg-6">
+        {% if form.cleaned_data  %}
+            <form  class="needs-validation was-validated" action="" method="POST" novalidate>
+        {% else %}
+            <form  class="needs-validation" action="" method="POST" novalidate>
+        {% endif %}
             {% csrf_token %}
             {% for post in form %}
-                <div class ="col-10 mb-3" >
+                <div class="mb-3">
                     {{post.label_tag}}
                     {{post}}
+                    <div class="invalid-feedback">
+                        {{post.errors}}
+                    </div>
                 </div>
             {% endfor %}
             <div class="col-12">
@@ -20,4 +30,5 @@
             </div>
         </form>
     </div>
+</div>
 {% endblock %}

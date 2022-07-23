@@ -19,3 +19,19 @@ class Post(models.Model):
     def publicar(self):
         self.data_pub = timezone.now()
         self.save()
+
+class Comentario(models.Model):
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL, 
+        on_delete=models.CASCADE
+    )
+    post = models.ForeignKey(
+        Post,
+        on_delete=models.CASCADE
+    )
+    data = models.DateTimeField(
+        default=timezone.now
+    )
+    comentario = models.TextField(
+        max_length=200
+    )

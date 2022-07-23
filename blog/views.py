@@ -1,9 +1,10 @@
 import datetime
 
 from django.shortcuts import render
-from django.views import generic
 from django.views.generic.edit import FormView, CreateView
+from django.views import generic
 from django.shortcuts import redirect
+from django.urls import reverse
 
 from blog.models import *
 from blog.forms import *
@@ -15,9 +16,9 @@ class Minha_home(generic.TemplateView):
     def get(self, request, *args, **kwargs):
         context = super(Minha_home, self).get_context_data(**kwargs)
         obj = Post.objects.filter(data_criacao__lte=timezone.now())
-        obj = obj.order_by('-data_pub')
+        obj = obj.order_by('data_pub')
         context.update({
-            'obj' : obj
+            'obj' : obj[:6]
         })
         return super(Minha_home, self).get( request, *args, **context)
 
@@ -36,22 +37,33 @@ class Meu_detalhe(generic.DetailView):
         # Add in a QuerySet of all the books
         return context
 
+
 class CriaFormView(CreateView):
     template_name = 'blog/form_create.html'
+    ## formulario modelde
     form_class = MeuForm
     success_url = '/'
 
 
     def post(self, request, *args, **kwargs):
         self.object = None
+        ## formulario preenchido 
+        form = self.get_form()
 
-        self.form_class = self.get_form()
-        if self.form_class.is_valid():
-            post = self.form_class.save(commit=False)
-            redirect
+        # from IPython import embed; embed()
+        
+        if form.is_valid():
+            instancia = form.save(commit=False)
+            instancia.autor = User.objects.get(email='bgmartins@ucs.br')
+            instancia.save()
+
+            return self.form_valid(form)
         else:
-            redirect('/posts/cadastro')
-        return super(CriaFormView, self).post(request, *args, **kwargs)
+            for field in form.fields:
+                if field in form.errors:
+                    form.fields[field].widget.attrs['class'] += ' is-invalid'
+                
+            return self.form_invalid(form)
 
 class EditaFormView(FormView):
     template_name = 'blog/form_edit.html'

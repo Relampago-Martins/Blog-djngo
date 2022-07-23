@@ -1,6 +1,5 @@
 from tkinter import Widget
-from django.forms import ModelForm
-
+from django.forms import *
 from blog.models import *
 
 class MeuForm(ModelForm):
@@ -12,4 +11,8 @@ class MeuForm(ModelForm):
             'text' : 'Corpo do post',
             'data_pub' : 'Data de publicação',
         }
-        
+        widgets = {
+            'titulo' :  TextInput(attrs={'class':'form-control'}),
+            'text' :  Textarea(attrs={'class':'form-control'}),
+            'data_pub' :   DateTimeInput(attrs={'class':'form-control'}),
+        }
