@@ -1,0 +1,22 @@
+{
+  "name": "relampago-martins",
+  "version": "1.0.0",
+  "description": "Meu primeiro site, minha primeira tentativa de deploy",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo its me"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Relampago-Martins/Blog-djngo.git"
+  },
+  "keywords": [
+    "server"
+  ],
+  "author": "bgmartins",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Relampago-Martins/Blog-djngo/issues"
+  },
+  "homepage": "https://github.com/Relampago-Martins/Blog-djngo#readme"
+}
