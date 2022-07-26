@@ -4,13 +4,14 @@
   "description": "Meu primeiro site, minha primeira tentativa de deploy",
   "main": "index.js",
   "scripts": {
-    "test": "echo its me"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Relampago-Martins/Blog-djngo.git"
   },
   "keywords": [
+    "express",
     "server"
   ],
   "author": "bgmartins",
