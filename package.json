@@ -2,22 +2,37 @@
   "name": "relampago-martins",
   "version": "1.0.0",
   "description": "Meu primeiro site, minha primeira tentativa de deploy",
+  "engines": {
+    "node": "16.x"
+  },
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js",
+    "build": "webpack",
+    "heroku-postbuild": "echo Skip build on Heroku"
+  },
+  "dependencies": {
+    "ejs": "^3.1.5",
+    "express": "^4.18.1"
+  },
+  "devDependencies": {
+    "got": "^11.3.0",
+    "tape": "^4.7.0"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Relampago-Martins/Blog-djngo.git"
   },
   "keywords": [
-    "express",
-    "server"
+    "node",
+    "heroku",
+    "express"
   ],
   "author": "bgmartins",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Relampago-Martins/Blog-djngo/issues"
   },
-  "homepage": "https://github.com/Relampago-Martins/Blog-djngo#readme"
+  "homepage": "https://github.com/Relampago-Martins/Blog-djngo#readme",
+  "heroku-run-build-script": true
 }
